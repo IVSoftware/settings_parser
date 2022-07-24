@@ -10,6 +10,8 @@ namespace settings_parser
 {
     public partial class MainForm : Form
     {
+        // The SettingsService and DataGridView bindings
+        // are read-only and set in initialization one time.
         private readonly SettingsService settingsService = new SettingsService();
         private readonly BindingList<Record> DGVDataSource = new BindingList<Record>();
 
@@ -43,10 +45,16 @@ namespace settings_parser
         }
 
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)
-        { 
-            printDebugMessage();
-            // Optional Save to current file
-            // settingsService.Save();
+        {
+            // The action must be allowed to complete for
+            // the printDebugMessage to be correct.
+            BeginInvoke((MethodInvoker)delegate
+            {
+                printDebugMessage();
+
+                // Optional Save to current file
+                // settingsService.Save();
+            });
         }
 
         private void button1_Click(object sender, EventArgs e) => printDebugMessage();
