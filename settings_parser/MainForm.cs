@@ -52,6 +52,8 @@ namespace settings_parser
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)
         { 
             printDebugMessage();
+            // Optional Save to current file
+            // settingsService.Save();
         }
 
         private void button1_Click(object sender, EventArgs e) => printDebugMessage();
@@ -73,12 +75,15 @@ namespace settings_parser
             Text = $"IsTestProperty: {settingsService.IsTestProperty}";
         }
     }
+    class Record
+    {
+        public string Description { get; set; }
+        public string Settings { get; set; }
+    }
 
-    [JsonObject(MemberSerialization.OptIn)]
     internal class SettingsService : INotifyPropertyChanged
     {
         #region Binding Properties
-        [JsonProperty]
         public bool IsTestProperty
         {
             get => _IsTestProperty;
@@ -113,10 +118,7 @@ namespace settings_parser
                 // Get the JSON properties
                 foreach (
                     var property in
-                    typeof(SettingsService).GetProperties()
-                    .Where(property => 
-                        property
-                        .GetCustomAttributes(typeof(JsonPropertyAttribute), true).Any()))
+                    typeof(SettingsService).GetProperties())
                 {
                     // Copy the property value to SettingsService without
                     property.SetValue(this, property.GetValue(tmp));
@@ -138,11 +140,5 @@ namespace settings_parser
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-    }
-
-    class Record
-    {
-        public string Description { get; set; }
-        public string Settings { get; set; }
     }
 }
