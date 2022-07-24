@@ -36,8 +36,16 @@ namespace settings_parser
                     DataSourceUpdateMode.OnPropertyChanged);
 
                 dataGridView1.DataSource = DGVDataSource;
-                DGVDataSource.Add(new Record { Description = "Use settings A", Settings = "SettingsParser.A.json" });
-                DGVDataSource.Add(new Record { Description = "Use settings B", Settings = "SettingsParser.B.json" });
+                DGVDataSource.Add(new Record 
+                { 
+                    Description = "Use settings A", 
+                    Settings = "SettingsParser.A.json" 
+                });
+                DGVDataSource.Add(new Record
+                { 
+                    Description = "Use settings B", 
+                    Settings = "SettingsParser.B.json" 
+                });
                 dataGridView1.AutoResizeColumns();
 
                 printDebugMessage();
