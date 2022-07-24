@@ -121,7 +121,8 @@ namespace settings_parser
                     var property in
                     typeof(SettingsService).GetProperties())
                 {
-                    // Copy the property value to SettingsService without
+                    // Copy the property value to SettingsService
+                    // without destroying the object and its bindings.
                     property.SetValue(this, property.GetValue(tmp));
                 }
             }
