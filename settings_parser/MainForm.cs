@@ -46,8 +46,8 @@ namespace settings_parser
 
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
-            // The action must be allowed to complete for
-            // the printDebugMessage to be correct.
+            // The action must be allowed to complete in order to avoid a
+            // race condition and have the printDebugMessage be correct.
             BeginInvoke((MethodInvoker)delegate
             {
                 printDebugMessage();
