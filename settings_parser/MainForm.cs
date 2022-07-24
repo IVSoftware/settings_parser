@@ -120,7 +120,7 @@ namespace settings_parser
             if (!string.Equals(_currentSettingsFile, fullPath))
             {
                 _currentSettingsFile = fullPath;
-                var tmp = 
+                SettingsService tmp = 
                     JsonConvert
                     .DeserializeObject<SettingsService>(
                         File.ReadAllText(_currentSettingsFile));
